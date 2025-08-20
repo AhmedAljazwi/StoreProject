@@ -3,6 +3,8 @@
 @section('title', 'التصنيفات')
 
 @section('content')
+  <a class="btn btn-primary" href="{{url('/admin/create-category')}}">تصنيف جديد</a>
+
     <table class="table">
   <thead>
     <tr>

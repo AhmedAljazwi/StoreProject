@@ -10,6 +10,9 @@
 </head>
 <body>
     @include('components.admin-navbar')
-    @yield('content')
+    @include('components.errors')
+    <div class="mx-5 mt-5">
+        @yield('content')
+    </div>
 </body>
 </html>
