@@ -33,4 +33,43 @@ class AdminController extends Controller
 
         return redirect('/admin/categories');
     }
+
+    public function edit($id) {
+        $category = Category::find($id);
+        if($category) {
+            return view('admin.edit-category', compact('category'));
+        }
+        else {
+            return redirect('/admin/categories');
+        }
+    }
+
+    public function update($id, Request $request) {
+        $request->validate([
+            'name' => 'required',
+        ],[
+            'name.required' => 'إسم التصنيف مطلوب',
+        ]);
+
+        $category = Category::find($id);
+        if($category) {
+            $category->name = $request['name'];
+            $category->save();
+        }
+        return redirect('admin/categories');
+    }
+
+    public function delete($id) {
+        $category = Category::find($id);
+        if($category) {
+            $category->delete();
+        }
+        return redirect('/admin/categories');
+    }
+
+    //////PRODUCTS//////
+    public function products() {
+        $products = Product::all();
+        return view('admin.products', compact('products'));
+    }
 }

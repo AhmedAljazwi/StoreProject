@@ -10,6 +10,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">الإسم</th>
+      <th>عمليات</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,10 @@
         <tr>
             <td>{{$category->id}}</td>
             <td>{{$category->name}}</td>
+            <td>
+              <a href="{{url('/admin/edit-category/'.$category->id)}}" class="btn btn-success" title="تعديل التصنيف">تعديل</a>
+              <a onclick="return confirm('هل أنت متأكد؟');" href="{{url('/admin/delete-category/'.$category->id)}}" class="btn btn-danger">حذف</a>
+            </td>
         </tr>
     @endforeach
     
