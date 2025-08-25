@@ -15,3 +15,5 @@ Route::put('/admin/update-category/{id}', [AdminController::class, 'update']);
 Route::get('/admin/delete-category/{id}', [AdminController::class, 'delete']);
 
 Route::get('/admin/products', [AdminController::class, 'products']);
+Route::get('/admin/create-product', [AdminController::class, 'createProduct']);
+Route::post('/admin/store-product', [AdminController::class, 'storeProduct']);

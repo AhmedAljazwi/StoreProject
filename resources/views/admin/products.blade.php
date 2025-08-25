@@ -10,6 +10,8 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">الإسم</th>
+      <th>الصورة</th>
+      <th>التصنيف</th>
       <th>عمليات</th>
     </tr>
   </thead>
@@ -19,6 +21,10 @@
         <tr>
             <td>{{$product->id}}</td>
             <td>{{$product->name}}</td>
+            <td>
+              <img src="{{$product->image}}" alt="" width="15%" height="15%">
+            </td>
+            <td>{{$product->category_id}}</td>
             <td>
               <a href="{{url('/admin/edit-product/'.$product->id)}}" class="btn btn-success" title="تعديل التصنيف">تعديل</a>
               <a onclick="return confirm('هل أنت متأكد؟');" href="{{url('/admin/delete-product/'.$product->id)}}" class="btn btn-danger">حذف</a>
