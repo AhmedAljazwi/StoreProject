@@ -88,4 +88,32 @@ class AdminController extends Controller
 
         return redirect('admin/products');
     }
+
+    public function editProduct($id) {
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('admin.edit-product', compact('product', 'categories'));
+    }
+
+    public function updateProduct(Request $request, $id) {
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required',
+            'selectedCategory' => 'required',
+        ],[
+            'name.required' => 'إسم المنتج مطلوب',
+            'image.required' => 'الصورة مطلوبة',
+            'selectedCategory.required' => 'التصنيف مطلوب',
+        ]);
+
+        $product = Product::find($id);
+        if($product) {
+            $product->name = $request['name'];
+            $product->image = $request['image'];
+            $product->category_id = $request['selectedCategory'];
+            $product->save();
+
+            return redirect('/admin/products');
+        }
+    }
 }

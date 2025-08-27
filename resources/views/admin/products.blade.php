@@ -24,7 +24,7 @@
             <td>
               <img src="{{$product->image}}" alt="" width="15%" height="15%">
             </td>
-            <td>{{$product->category_id}}</td>
+            <td>{{$product->category->name}}</td>
             <td>
               <a href="{{url('/admin/edit-product/'.$product->id)}}" class="btn btn-success" title="تعديل التصنيف">تعديل</a>
               <a onclick="return confirm('هل أنت متأكد؟');" href="{{url('/admin/delete-product/'.$product->id)}}" class="btn btn-danger">حذف</a>
