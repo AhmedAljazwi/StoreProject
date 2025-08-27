@@ -116,4 +116,12 @@ class AdminController extends Controller
             return redirect('/admin/products');
         }
     }
+
+    public function deleteProduct($id) {
+        $product = Product::find($id);
+        if($product) {
+            $product->delete();
+            return redirect('/admin/products');
+        }
+    }
 }
