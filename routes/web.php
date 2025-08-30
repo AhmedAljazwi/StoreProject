@@ -19,4 +19,8 @@ Route::get('/admin/create-product', [AdminController::class, 'createProduct']);
 Route::post('/admin/store-product', [AdminController::class, 'storeProduct']);
 Route::get('/admin/edit-product/{id}', [AdminController::class, 'editProduct']);
 Route::put('/admin/update-product/{id}', [AdminController::class, 'updateProduct']);
-Route::get('admin/delete-product/{id}', [AdminController::class, 'deleteProduct']);
+Route::get('/admin/delete-product/{id}', [AdminController::class, 'deleteProduct']);
+
+Route::get('/admin/inventories', [AdminController::class, 'inventory']);
+Route::get('/admin/create-inventory', [AdminController::class, 'createInventory']);
+Route::post('/admin/store-inventory', [AdminController::class, 'storeInventory']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Inventory;
 
 class AdminController extends Controller
 {
@@ -62,6 +63,12 @@ class AdminController extends Controller
 
     public function delete($id) {
         $category = Category::find($id);
+
+        $checkProduct = Product::where('category_id', $id)->first();
+        if($checkProduct) {
+            return redirect('/admin/categories')->with('failed', 'التصنيف مرتبط بأحد المنتجات');
+        }
+
         if($category) {
             $category->delete();
         }
@@ -70,7 +77,7 @@ class AdminController extends Controller
 
     //////PRODUCTS//////
     public function products() {
-        $products = Product::all();
+        $products = Product::latest()->get();
         return view('admin.products', compact('products'));
     }
 
@@ -123,5 +130,26 @@ class AdminController extends Controller
             $product->delete();
             return redirect('/admin/products');
         }
+    }
+
+    //////INVENTORY//////
+    public function inventory() {
+        $inventories = Inventory::latest()->get();
+        return view('admin.inventory', compact('inventories'));
+    }
+
+    public function createInventory() {
+        $products = Product::latest()->get();
+        return view('admin.create-inventory', compact('products'));
+    }
+
+    public function storeInventory(Request $request) {
+        $newInventory = new Inventory;
+        $newInventory->price = $request['price'];
+        $newInventory->quantity = $request['quantity'];
+        $newInventory->product_id = $request['selectedProduct'];
+        $newInventory->save();
+
+        return redirect('/admin/inventories')->with('success', 'تم الحفظ بنجاح');
     }
 }

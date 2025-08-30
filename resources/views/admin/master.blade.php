@@ -11,6 +11,7 @@
 <body>
     @include('components.admin-navbar')
     @include('components.errors')
+    @include('components.messages')
     <div class="mx-5 mt-5">
         @yield('content')
     </div>
