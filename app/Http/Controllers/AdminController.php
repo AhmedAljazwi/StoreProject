@@ -144,6 +144,21 @@ class AdminController extends Controller
     }
 
     public function storeInventory(Request $request) {
+        $request->validate([
+            'quantity' => 'required',
+            'price' => 'required',
+            'selectedProduct' => 'required',
+        ],[
+            'quantity.required' => 'كمية المنتج مطلوبة',
+            'price.required' => 'سعر المنتج مطلوب',
+            'selectedProduct.required' => 'المنتج مطلوب',
+        ]);
+
+        $checkProduct = Inventory::where('product_id', $request['selectedProduct'])->first();
+        if($checkProduct) {
+            return redirect('/admin/inventories')->with('failed', 'المنتج موجود من قبل');
+        }
+        
         $newInventory = new Inventory;
         $newInventory->price = $request['price'];
         $newInventory->quantity = $request['quantity'];
@@ -151,5 +166,23 @@ class AdminController extends Controller
         $newInventory->save();
 
         return redirect('/admin/inventories')->with('success', 'تم الحفظ بنجاح');
+    }
+
+    public function editInventory($id) {
+        $inventory = Inventory::find($id);
+        if($inventory) {
+            return view('admin.edit-inventory', compact('inventory'));
+        }
+    }
+
+    public function updateInventory(Request $request, $id) {
+        $inventory = Inventory::find($id);
+        if($inventory) {
+            $inventory->quantity = $request['quantity'];
+            $inventory->price = $request['price'];
+            $inventory->save();
+
+            return redirect('/admin/inventories')->with('success', 'تم تحديث المنتج');
+        }
     }
 }

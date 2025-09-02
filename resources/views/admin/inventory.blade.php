@@ -27,6 +27,8 @@
               <img src="{{$inventory->product->image}}" alt="" width="15%" height="15%">
             </td>
             <td>{{$inventory->product->category->name}}</td>
+            <td>{{$inventory->quantity}}</td>
+            <td>{{$inventory->price}} د.ل</td>
             <td>
               <a href="{{url('/admin/edit-inventory/'.$inventory->id)}}" class="btn btn-success" title="تعديل المنتج">تعديل</a>
               <a onclick="return confirm('هل أنت متأكد؟');" href="{{url('/admin/delete-inventory/'.$inventory->id)}}" class="btn btn-danger">حذف</a>
