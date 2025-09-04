@@ -185,4 +185,24 @@ class AdminController extends Controller
             return redirect('/admin/inventories')->with('success', 'تم تحديث المنتج');
         }
     }
+
+    public function deleteInventory($id) {
+        $checkInventory = Inventory::find($id);
+        if($checkInventory) {
+            $checkCart = Cart::where('inventory_id', $id)->first();
+            if($checkCart) {
+                return redirect('failed', 'لا يمكن حذف المنتج لأنه في العربة');
+            }
+            else {
+                $checkOrder = Order::where('inventory_id', $id)->first();
+                if($checkOrder) {
+                    return redirect('failed', 'لا يمكن حذف المنتج لأنه موجود في طلبية ');
+                }
+                else {
+                    $checkInventory->delete();
+                    return redirect('success', 'تم حذف المنتج من المخزن بنجاح');
+                }
+            }
+        }
+    }
 }
