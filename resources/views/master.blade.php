@@ -10,6 +10,8 @@
 </head>
 <body>
     @include('components.navbar')
+    @include('components.errors')
+    @include('components.messages')
     @yield('content')
 </body>
 </html>
