@@ -8,6 +8,8 @@ use App\Http\Controllers\AuthController;
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'registerUser']);
+Route::get('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'check']);
 Route::get('/admin/home', [AdminController::class, 'home']);
 
 Route::get('/admin/categories', [AdminController::class, 'categories']);

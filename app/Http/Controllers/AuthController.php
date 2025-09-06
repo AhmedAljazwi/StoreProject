@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -32,5 +33,27 @@ class AuthController extends Controller
         $newUser->save();
 
         return redirect('/login')->with('success', 'تم إنشاء الحساب بنجاح');
+    }
+
+    public function login() {
+        return view('login');
+    }
+
+    public function check(Request $request) {
+        $request->validate([
+            'phone' => 'required',
+            'password' => 'required',
+        ],[
+            'phone.required' => 'رقم الهاتف مطلوب',
+            'password.required' => 'كلمة المرور مطلوبة',
+        ]);
+
+        $cred = $request->only('phone', 'password');
+        if(Auth::attempt($cred)) {
+            return redirect('/');
+        }
+        else {
+            return redirect('/login')-with('failed', 'البيانات غير صحيحة');
+        }
     }
 }
