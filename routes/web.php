@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'registerUser']);
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'check']);
+
 Route::get('/admin/home', [AdminController::class, 'home']);
 
 Route::get('/admin/categories', [AdminController::class, 'categories']);
@@ -32,3 +34,7 @@ Route::post('/admin/store-inventory', [AdminController::class, 'storeInventory']
 Route::get('/admin/edit-inventory/{id}', [AdminController::class, 'editInventory']);
 Route::put('/admin/update-inventory/{id}', [AdminController::class, 'updateInventory']);
 Route::get('/admin/delete-inventory/{id}', [AdminController::class, 'deleteInventory']);
+
+/////USER ROUTES/////
+Route::get('/user/cart', [UserController::class, 'cart']);
+Route::get('/user/add-cart/{id}', [UserController::class, 'addCart']);

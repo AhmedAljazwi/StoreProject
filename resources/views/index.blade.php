@@ -15,7 +15,7 @@
                                     <img class="mx-auto d-block" width="40%" height="100%" src="{{$inventory->product->image}}" alt="">
                                 </div>
                                 <h6 class="fw-bold text-end">{{$inventory->price}} د.ل</h6>
-                                <a @if(Auth::user()) href="{{url('/add-cart/'.$inventory->id)}}" @else href="{{url('/register')}}" @endif><i class="bi bi-cart3" style="font-size: 24px;"></i></a>
+                                <a @if(Auth::user()) href="{{url('/user/add-cart/'.$inventory->id)}}" @else href="{{url('/register')}}" @endif><i class="bi bi-cart3" style="font-size: 24px;"></i></a>
                             </div>
                         </div>
                     </div>
