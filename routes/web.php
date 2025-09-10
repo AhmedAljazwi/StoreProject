@@ -38,3 +38,4 @@ Route::get('/admin/delete-inventory/{id}', [AdminController::class, 'deleteInven
 /////USER ROUTES/////
 Route::get('/user/cart', [UserController::class, 'cart']);
 Route::get('/user/add-cart/{id}', [UserController::class, 'addCart']);
+Route::post('/user/update-cart/{id}', [UserController::class, 'updateCart']);
