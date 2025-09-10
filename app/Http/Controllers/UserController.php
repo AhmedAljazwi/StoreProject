@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Inventory;
+use App\Models\Bill;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -49,6 +50,33 @@ class UserController extends Controller
                     return redirect('/user/cart')->with('failed', 'الكمية المتوفرة لا تكفي');
                 }
             }
+        }
+    }
+
+    public function deleteCart($id) {
+        $cart = Cart::where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if($cart) {
+            $cart->delete();
+            return redirect('/user/cart')->with('success', 'تم حذف العنصر');
+        }
+    }
+
+    public function purchase() {
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        if(sizeof($carts) <= 0) {
+            return redirect('/user/cart')->with('failed', 'العربة فارغة');
+        }
+        else {
+            $total = 0;
+            foreach ($carts as $cart) {
+                $total = $total + ($cart->qunatity * $cart->inventory->price);
+            }
+
+            $bill = new Bill;
+            $bill->total = $total;
+            $bill->user_id = Auth::user()->id;
+            $bill->status_id = 1;
+            $bill->save();
         }
     }
 }
