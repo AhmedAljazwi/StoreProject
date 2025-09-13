@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">الرئيسية</a>
+          <a class="nav-link active" aria-current="page" href="{{url('/')}}">الرئيسية</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">طلباتي</a>
+          <a class="nav-link" aria-current="page" href="{{url('user/orders/')}}">طلباتي</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{{url('/user/cart')}}"><i class="bi bi-cart4"></i></a>

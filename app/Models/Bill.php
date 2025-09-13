@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bill extends Model
 {
-    //
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
+    public function status() {
+        return $this->belongsTo(Status::class, 'status_id', 'id');
+    }
 }

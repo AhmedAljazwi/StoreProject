@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Inventory;
 use App\Models\Bill;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -69,7 +70,7 @@ class UserController extends Controller
         else {
             $total = 0;
             foreach ($carts as $cart) {
-                $total = $total + ($cart->qunatity * $cart->inventory->price);
+                $total = $total + ($cart->quantity * $cart->inventory->price);
             }
 
             $bill = new Bill;
@@ -77,6 +78,28 @@ class UserController extends Controller
             $bill->user_id = Auth::user()->id;
             $bill->status_id = 1;
             $bill->save();
+
+            foreach($carts as $cart) {
+                $order = new Order;
+                $order->inventory_id = $cart->inventory_id;
+                $order->quantity = $cart->quantity;
+                $order->price = $cart->inventory->price;
+                $order->bill_id = $bill->id;
+                $order->save();
+
+                $inventory = Inventory::where('id', $cart->inventory_id)->first();
+                $inventory->quantity = $inventory->quantity - $cart->quantity;
+                $inventory->save();
+            }
+
+            Cart::where('user_id', Auth::user()->id)->delete();
+
+            return redirect('/user/orders/')->with('success', 'تم الطلب بنجاح');
         }
+    }
+
+    public function orders() {
+        $bills = Bill::with('orders')->latest()->get();
+        return view('user.orders', compact('bills'));
     }
 }
