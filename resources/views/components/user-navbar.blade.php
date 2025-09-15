@@ -15,6 +15,9 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{{url('/user/cart')}}"><i class="bi bi-cart4"></i></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url('/logout')}}">تسجيل الخروج</a>
+        </li>
       </ul>
     </div>
   </div>

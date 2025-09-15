@@ -50,10 +50,20 @@ class AuthController extends Controller
 
         $cred = $request->only('phone', 'password');
         if(Auth::attempt($cred)) {
-            return redirect('/');
+            if(Auth::user()->is_admin == 1) {
+                return redirect('admin/home');
+            }
+            elseif(Auth::user()->is_admin == 0) {
+                return redirect('/');
+            }
         }
         else {
             return redirect('/login')-with('failed', 'البيانات غير صحيحة');
         }
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect('/login');
     }
 }

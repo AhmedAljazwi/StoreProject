@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Inventory;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Bill;
+use App\Models\Status;
 
 class AdminController extends Controller
 {
@@ -203,6 +207,33 @@ class AdminController extends Controller
                     return redirect('success', 'تم حذف المنتج من المخزن بنجاح');
                 }
             }
+        }
+    }
+
+    public function orders() {
+        $bills = Bill::with('orders')->orderBy('status_id', 'ASC')->get();
+        return view('admin.orders', compact('bills'));
+    }
+
+    public function editOrder($id) {
+        $bill = Bill::find($id);
+        $statuses = Status::all();
+        return view('admin.edit-order', compact('bill', 'statuses'));
+    }
+
+    public function updateOrder(Request $request, $id) {
+        $request->validate([
+            'selectedStatus' => 'required',
+        ],[
+            'selectedStatus.required' => 'الحالة مطلوبة',
+        ]);
+
+        $bill = Bill::find($id);
+        if($bill) {
+            $bill->status_id = $request['selectedStatus'];
+            $bill->save();
+
+            return redirect('/admin/orders')->with('success', 'تم التحديث بنجاح');
         }
     }
 }
