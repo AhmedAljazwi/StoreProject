@@ -14,28 +14,28 @@ Route::post('/register', [AuthController::class, 'registerUser']);
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'check']);
 
-Route::middleare(AdminMiddleware::class)->get('/admin/home', [AdminController::class, 'home']);
+Route::middleware(AdminMiddleware::class)->get('/admin/home', [AdminController::class, 'home']);
 
-Route::middleare(AdminMiddleware::class)->get('/admin/categories', [AdminController::class, 'categories']);
-Route::middleare(AdminMiddleware::class)->get('/admin/create-category', [AdminController::class, 'create']);
-Route::middleare(AdminMiddleware::class)->post('/admin/store-catgeory', [AdminController::class, 'store']);
-Route::middleare(AdminMiddleware::class)->get('/admin/edit-category/{id}', [AdminController::class, 'edit']);
-Route::middleare(AdminMiddleware::class)->put('/admin/update-category/{id}', [AdminController::class, 'update']);
-Route::middleare(AdminMiddleware::class)->get('/admin/delete-category/{id}', [AdminController::class, 'delete']);
+Route::middleware(AdminMiddleware::class)->get('/admin/categories', [AdminController::class, 'categories']);
+Route::middleware(AdminMiddleware::class)->get('/admin/create-category', [AdminController::class, 'create']);
+Route::middleware(AdminMiddleware::class)->post('/admin/store-catgeory', [AdminController::class, 'store']);
+Route::middleware(AdminMiddleware::class)->get('/admin/edit-category/{id}', [AdminController::class, 'edit']);
+Route::middleware(AdminMiddleware::class)->put('/admin/update-category/{id}', [AdminController::class, 'update']);
+Route::middleware(AdminMiddleware::class)->get('/admin/delete-category/{id}', [AdminController::class, 'delete']);
 
-Route::middleare(AdminMiddleware::class)->get('/admin/products', [AdminController::class, 'products']);
-Route::middleare(AdminMiddleware::class)->get('/admin/create-product', [AdminController::class, 'createProduct']);
-Route::middleare(AdminMiddleware::class)->post('/admin/store-product', [AdminController::class, 'storeProduct']);
-Route::middleare(AdminMiddleware::class)->get('/admin/edit-product/{id}', [AdminController::class, 'editProduct']);
-Route::middleare(AdminMiddleware::class)->put('/admin/update-product/{id}', [AdminController::class, 'updateProduct']);
-Route::middleare(AdminMiddleware::class)->get('/admin/delete-product/{id}', [AdminController::class, 'deleteProduct']);
+Route::middleware(AdminMiddleware::class)->get('/admin/products', [AdminController::class, 'products']);
+Route::middleware(AdminMiddleware::class)->get('/admin/create-product', [AdminController::class, 'createProduct']);
+Route::middleware(AdminMiddleware::class)->post('/admin/store-product', [AdminController::class, 'storeProduct']);
+Route::middleware(AdminMiddleware::class)->get('/admin/edit-product/{id}', [AdminController::class, 'editProduct']);
+Route::middleware(AdminMiddleware::class)->put('/admin/update-product/{id}', [AdminController::class, 'updateProduct']);
+Route::middleware(AdminMiddleware::class)->get('/admin/delete-product/{id}', [AdminController::class, 'deleteProduct']);
 
-Route::middleare(AdminMiddleware::class)->get('/admin/inventories', [AdminController::class, 'inventory']);
-Route::middleare(AdminMiddleware::class)->get('/admin/create-inventory', [AdminController::class, 'createInventory']);
-Route::middleare(AdminMiddleware::class)->post('/admin/store-inventory', [AdminController::class, 'storeInventory']);
-Route::middleare(AdminMiddleware::class)->get('/admin/edit-inventory/{id}', [AdminController::class, 'editInventory']);
-Route::middleare(AdminMiddleware::class)->put('/admin/update-inventory/{id}', [AdminController::class, 'updateInventory']);
-Route::middleare(AdminMiddleware::class)->get('/admin/delete-inventory/{id}', [AdminController::class, 'deleteInventory']);
+Route::middleware(AdminMiddleware::class)->get('/admin/inventories', [AdminController::class, 'inventory']);
+Route::middleware(AdminMiddleware::class)->get('/admin/create-inventory', [AdminController::class, 'createInventory']);
+Route::middleware(AdminMiddleware::class)->post('/admin/store-inventory', [AdminController::class, 'storeInventory']);
+Route::middleware(AdminMiddleware::class)->get('/admin/edit-inventory/{id}', [AdminController::class, 'editInventory']);
+Route::middleware(AdminMiddleware::class)->put('/admin/update-inventory/{id}', [AdminController::class, 'updateInventory']);
+Route::middleware(AdminMiddleware::class)->get('/admin/delete-inventory/{id}', [AdminController::class, 'deleteInventory']);
 
 Route::middleware(AdminMiddleware::class)->get('/admin/orders', [AdminController::class, 'orders']);
 Route::middleware(AdminMiddleware::class)->get('/admin/edit-order/{id}', [AdminController::class, 'editOrder']);
